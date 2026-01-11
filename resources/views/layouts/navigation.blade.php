@@ -17,7 +17,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('reports.charts')" :active="request()->routeIs('reports.*')">
-                        {{ __('Report') }}
+                        {{ __('Reports') }}
                     </x-nav-link>
                     <x-nav-link :href="route('contacts.index')" :active="request()->routeIs('contacts.*')">
                         {{ __(key: 'Contacts') }}
@@ -83,7 +83,7 @@
             </x-responsive-nav-link>
 
             <x-responsive-nav-link :href="route('reports.charts')" :active="request()->routeIs('reports.*')">
-                        {{ __('Report') }}
+                        {{ __('Reports') }}
                     </x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('contacts.index')" :active="request()->routeIs('contacts.*')">
                         {{ __(key: 'Contacts') }}

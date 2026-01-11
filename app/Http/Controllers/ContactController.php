@@ -31,7 +31,12 @@ class ContactController extends Controller
 
     public function store(StoreContactRequest $request)
     {
-        $this->contacts->store($request->validated());
+        $data = $request->validated();
+        if (!$request->boolean('has_reminder')) {
+            $data['reminder_at'] = null;
+            $data['reminder_note'] = null;
+        }
+        $this->contacts->store($data);
 
         return redirect()
             ->route('contacts.index')
@@ -45,7 +50,12 @@ class ContactController extends Controller
 
     public function update(UpdateContactRequest $request, Contact $contact)
     {
-        $this->contacts->update($contact, $request->validated());
+        $data = $request->validated();
+        if (!$request->boolean('has_reminder')) {
+            $data['reminder_at'] = null;
+            $data['reminder_note'] = null;
+        }
+        $this->contacts->update($contact, $data);
 
         return redirect()
             ->route('contacts.index')
@@ -56,8 +66,9 @@ class ContactController extends Controller
     {
         return Contact::whereNotNull('reminder_at')
             ->where('reminder_at', '>=', now())
+            ->where('has_reminder',true)
             ->orderBy('reminder_at')
-            ->limit(5)
+            ->limit(10)
             ->get();
     }
 

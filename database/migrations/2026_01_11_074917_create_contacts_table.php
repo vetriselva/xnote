@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('company')->nullable();
             $table->text('address')->nullable();
+            $table->boolean('has_reminder')->default(false)->nullable();
             $table->dateTime('reminder_at')->nullable()->after('notes');
             $table->string('reminder_note')->nullable()->after('reminder_at');
             $table->timestamps();

@@ -28,6 +28,7 @@ class StoreContactRequest extends FormRequest
             'address' => 'nullable|string',
             'notes'   => 'nullable|string|max:1000',
             'reminder_at'   => 'nullable|date',
+            'has_reminder' => 'boolean',
             'reminder_note' => 'nullable|string|max:255',
         ];
     }

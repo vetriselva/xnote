@@ -29,6 +29,7 @@ class UpdateContactRequest extends FormRequest
             'email'   => 'nullable|email|max:255',
             'company' => 'nullable|string|max:255',
             'address' => 'nullable|string',
+            'has_reminder'=> 'boolean',
             'reminder_at'   => 'nullable|date',
             'reminder_note' => 'nullable|string|max:255',
         ];
