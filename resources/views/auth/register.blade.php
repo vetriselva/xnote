@@ -2,7 +2,7 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
         <div>
-            <x-input-label for="tenant_name" value="Company / Tenant Name" />
+            <x-input-label for="tenant_name" value="Company Name" />
             <x-text-input id="tenant_name" class="block mt-1 w-full"
                 type="text" name="tenant_name" required />
             <x-input-error :messages="$errors->get('tenant_name')" class="mt-2" />

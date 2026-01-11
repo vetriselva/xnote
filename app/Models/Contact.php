@@ -11,6 +11,7 @@ class Contact extends BaseTenantModel
         'email',
         'company',
         'address',
+        'has_reminder',
         'reminder_at',
         'reminder_note',
     ];

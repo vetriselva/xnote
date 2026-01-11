@@ -41,10 +41,12 @@ class RegisteredUserController extends Controller
 
         DB::transaction(function () use ($request) {
 
-            $tenant = Tenant::create([
-                'name' => $request->tenant_name
-            ]);
 
+            $tenantExists = Tenant::where('name', $request->tenant_name)->first();
+            $tenant = $tenantExists;
+            if (!$tenantExists) {
+                $tenant = Tenant::create(['name' => $request->tenant_name]);
+            }
             User::create([
                 'tenant_id' => $tenant->id,
                 'name' => $request->name,
@@ -52,7 +54,9 @@ class RegisteredUserController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            event(new SeederEvent($tenant));
+            if (!$tenantExists) {
+                event(new SeederEvent($tenant));
+            }
         });
 
         return redirect()->route('login');
