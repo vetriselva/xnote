@@ -1,7 +1,7 @@
 import './bootstrap';
 import Alpine from 'alpinejs';
 
-const isProd = window.location.hostname === "sd.d4e.in";
+const isProd = window.location.hostname === "xnote.d4e.in";
 
 if (isProd) {
     axios.defaults.baseURL = "/public";
