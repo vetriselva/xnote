@@ -4,7 +4,7 @@ import Alpine from 'alpinejs';
 const isProd = window.location.hostname === "xnote.d4e.in";
 
 if (isProd) {
-    axios.defaults.baseURL = "/public";
+    axios.defaults.baseURL = "/xnote/public";
 }
 
 window.Alpine = Alpine;
