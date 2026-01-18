@@ -26,7 +26,7 @@
                 type="text"
                 name="search"
                 value="{{ request('search') }}"
-                placeholder="Search name, phone, email, company..."
+                placeholder="Search name, phone, email, others..."
                 class="border rounded px-3 py-2 w-full max-w-md"
             >
             <label class="flex items-center gap-1 text-sm">
@@ -54,7 +54,7 @@
                         <th class="p-3 text-left">Name</th>
                         <th class="p-3 text-left">Phone</th>
                         <th class="p-3 text-left">Email</th>
-                        <th class="p-3 text-left">Company</th>
+                        <th class="p-3 text-left">Others</th>
                         <th class="p-3 text-left">Reminder</th>
                         <th class="p-3 text-left">Actions</th>
                     </tr>
@@ -76,7 +76,7 @@
                             </td>
 
                             <td class="p-3">
-                                {{ $contact->company ?? '—' }}
+                                {{ $contact->others ?? '—' }}
                             </td>
 
                             <td class="p-3">

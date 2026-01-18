@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
-            $table->string('company')->nullable();
+            $table->longText('others')->nullable();
             $table->text('address')->nullable();
 
             $table->boolean('has_reminder')->default(false);

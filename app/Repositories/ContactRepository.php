@@ -16,7 +16,7 @@ class ContactRepository implements ContactRepositoryInterface
                   ->orWhere('phone', 'like', '%' . $filters['search'] . '%')
                   ->orWhere('email', 'like', '%' . $filters['search'] . '%')
                   ->orWhere('reminder_note', 'like', '%' . $filters['search'] . '%')
-                  ->orWhere('company', 'like', '%' . $filters['search'] . '%');
+                  ->orWhere('others', 'like', '%' . $filters['search'] . '%');
             });
         }
 

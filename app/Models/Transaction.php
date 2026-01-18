@@ -14,7 +14,8 @@ class Transaction extends BaseTenantModel
         'unit_price',
         'total_amount',
         'payment_mode',
-
+        'created_at',
+        'transaction_date',
     ];
 
     public function service(){

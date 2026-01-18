@@ -10,7 +10,7 @@ class ReportController extends Controller {
     {
         $monthlySales = Transaction::where('tenant_id', auth()->user()->tenant_id)
             ->selectRaw("
-                DATE_FORMAT('%Y-%m', created_at) as month,
+                DATE_FORMAT(created_at, '%Y-%m') AS month,
                 SUM(total_amount) as total
             ")
             ->groupBy('month')

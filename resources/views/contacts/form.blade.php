@@ -32,13 +32,13 @@
 
     </div>
 
-    <!-- Company -->
+    <!-- Others -->
     <div>
-        <label class="block font-medium">Company</label>
-        <input name="company"
-               value="{{ old('company', $contact->company ?? '') }}"
+        <label class="block font-medium">Others</label>
+        <input name="others"
+               value="{{ old('others', $contact->others ?? '') }}"
                class="w-full border rounded px-3 py-2">
-        @error('company') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
+        @error('others') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
 
     </div>
 

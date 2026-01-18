@@ -9,7 +9,7 @@ class Contact extends BaseTenantModel
         'name',
         'phone',
         'email',
-        'company',
+        'others',
         'address',
         'has_reminder',
         'reminder_at',

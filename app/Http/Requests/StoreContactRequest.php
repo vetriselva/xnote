@@ -24,7 +24,7 @@ class StoreContactRequest extends FormRequest
                     ->where(fn($query) => $query->where('tenant_id', auth()->user()->tenant_id)),
             ],
             'email'   => 'nullable|email|max:255',
-            'company' => 'nullable|string|max:255',
+            'others' => 'nullable|string|max:255',
             'address' => 'nullable|string',
             'notes'   => 'nullable|string|max:1000',
             'reminder_at'   => 'nullable|date',
