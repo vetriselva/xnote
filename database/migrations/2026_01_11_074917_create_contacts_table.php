@@ -13,19 +13,22 @@ return new class extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tenant_id')->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('tenant_id');
+
             $table->string('name');
-            $table->string('phone')->nullable()->unique('phone');
+            $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('company')->nullable();
             $table->text('address')->nullable();
-            $table->boolean('has_reminder')->default(false)->nullable();
+
+            $table->boolean('has_reminder')->default(false);
             $table->dateTime('reminder_at')->nullable();
-            $table->string('reminder_note')->nullable()->after('reminder_at');
+            $table->string('reminder_note')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
-            $table->index('tenant_id');
         });
+
 
     }
 
