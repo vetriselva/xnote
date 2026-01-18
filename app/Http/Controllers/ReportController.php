@@ -18,7 +18,7 @@ class ReportController extends Controller {
             ->get();
 
         $salesLabels = $monthlySales->map(function ($row) {
-            return Carbon::parse($row->month . '-01')->format('M Y');
+            return Carbon::createFromFormat('Y-m', $row->month)->format('M Y');
         });
 
         $services = Transaction::selectRaw('services.name as service, SUM(transactions.total_amount) as total')
