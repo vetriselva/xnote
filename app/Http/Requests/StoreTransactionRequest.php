@@ -16,7 +16,7 @@ class StoreTransactionRequest extends FormRequest
         return [
             'service_id' => 'required|exists:services,id',
             'quantity' => 'required|integer|min:1',
-            'unit_price' => 'required|numeric|min:0',
+            'unit_price' => 'required|decimal:0,3|min:0',
             'payment_mode' => 'required|in:cash,upi,card',
             // 'transaction_date' => 'required|date',
         ];

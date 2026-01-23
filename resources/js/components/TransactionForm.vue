@@ -1,6 +1,5 @@
 <template>
     <form
-        @submit.prevent="submit"
         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 bg-white p-4 rounded shadow"
     >
         <!-- Service -->
@@ -60,6 +59,7 @@
         :class="isEditMode
             ? 'bg-green-600 text-white rounded px-4 py-2 w-full'
             : 'bg-blue-600 text-white rounded px-4 py-2 w-full'"
+            @click="submit"
     >
         {{ isEditMode ? 'Update' : 'Save' }}
     </button>
@@ -102,7 +102,8 @@ const form = reactive({
     unit_price: 0,
     payment_mode: "cash",
 });
-const handleReset = () => {
+const handleReset = (event) => {
+    event.preventDefault();
     resetForm();
     isEditMode.value = false;
 }
@@ -145,7 +146,8 @@ watch(
 );
 
 /* ✅ SUBMIT */
-const submit = async () => {
+const submit = async (event) => {
+    event.preventDefault();
     if (isEditMode.value) {
         await axios.post(`/transactions/${props.editTransaction.id}`, form);
     } else {
