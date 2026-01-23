@@ -55,13 +55,24 @@
 
         <!-- Submit -->
         <div class="flex items-end col-span-1">
-            <button
-                type="submit"
-                class="bg-blue-600 text-white rounded px-4 py-2 w-full"
-            >
-                Save
-            </button>
-        </div>
+    <button
+        type="submit"
+        :class="isEditMode
+            ? 'bg-green-600 text-white rounded px-4 py-2 w-full'
+            : 'bg-blue-600 text-white rounded px-4 py-2 w-full'"
+    >
+        {{ isEditMode ? 'Update' : 'Save' }}
+    </button>
+
+    <button v-if="isEditMode"
+        type="submit"
+        class="bg-red-600 ml-2 text-white rounded px-4 py-2 w-full"
+        @click="handleReset"
+    >
+        Reset
+    </button>
+</div>
+
     </form>
 </template>
 
@@ -91,12 +102,18 @@ const form = reactive({
     unit_price: 0,
     payment_mode: "cash",
 });
+const handleReset = () => {
+    resetForm();
+    isEditMode.value = false;
+}
 
 const resetForm = () => {
-    form.service_id = "";
-    form.quantity = 1;
-    form.unit_price = 0;
-    form.payment_mode = "cash";
+    const defaultService = props.services.find((s) => s.is_default);
+
+    if (defaultService) {
+        form.unit_price = defaultService.price;
+        form.service_id = defaultService.id;
+    }
 };
 
 watch(
