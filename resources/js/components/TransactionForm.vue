@@ -78,7 +78,7 @@
 
 
 <script setup>
-import { computed, reactive, watch } from "vue";
+import { computed, reactive, ref, watch } from "vue";
 import axios from "axios";
 
 const props = defineProps({
@@ -92,9 +92,9 @@ const props = defineProps({
     },
 });
 
-const emit = defineEmits(["transaction-added-or-updated"]);
+const isEditMode = ref(false);
 
-const isEditMode = computed(() => !!props.editTransaction?.id);
+const emit = defineEmits(["transaction-added-or-updated"]);
 
 const form = reactive({
     service_id: "",
@@ -102,6 +102,7 @@ const form = reactive({
     unit_price: 0,
     payment_mode: "cash",
 });
+
 const handleReset = (event) => {
     event.preventDefault();
     resetForm();
@@ -126,6 +127,14 @@ watch(
         if (service) {
             form.unit_price = service.price;
         }
+    },
+    { immediate: true }
+);
+
+watch(
+    () => props.editTransaction?.id,
+    () => {
+        isEditMode.value = props.editTransaction?.id != null
     },
     { immediate: true }
 );
