@@ -108,6 +108,7 @@ const handleReset = (event) => {
     isEditMode.value = false;
 }
 
+
 const resetForm = () => {
     const defaultService = props.services.find((s) => s.is_default);
 
@@ -116,6 +117,18 @@ const resetForm = () => {
         form.service_id = defaultService.id;
     }
 };
+
+watch(
+    () => form.service_id,
+    () => {
+        const service = props.services.find((s) => s.id == form.service_id);
+
+        if (service) {
+            form.unit_price = service.price;
+        }
+    },
+    { immediate: true }
+);
 
 watch(
     () => props.services,
@@ -144,6 +157,7 @@ watch(
     },
     { immediate: true }
 );
+
 
 /* ✅ SUBMIT */
 const submit = async (event) => {
