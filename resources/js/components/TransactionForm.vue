@@ -115,6 +115,7 @@ const resetForm = () => {
 
     if (defaultService) {
         form.unit_price = defaultService.price;
+        form.quantity = 1;
         form.service_id = defaultService.id;
     }
 };
