@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Exports\TransactionsExport;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Models\Service;
 use App\Models\Transaction;
 use App\Repositories\Contracts\TransactionRepositoryInterface;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TransactionController extends Controller
 {
@@ -58,20 +61,29 @@ class TransactionController extends Controller
     {
         $query = Transaction::with('service')->orderBy('created_at', 'desc');
 
-        // ✅ Filter by service
         if ($request->service_id) {
             $query->where('service_id', $request->service_id);
         }
 
-        // ✅ Filter by date range
         if ($request->from_date && $request->to_date) {
             $query->whereBetween('created_at', [$request->from_date, $request->to_date]);
         }
 
-        // ✅ Pagination
         $transactions = $query->paginate(10);
 
         return response()->json($transactions);
+    }
+
+    public function export(Request $request)
+    {
+        return Excel::download(
+            new TransactionsExport(
+                $request->service_id,
+                $request->from_date,
+                $request->to_date
+            ),
+            'transactions.xlsx'
+        );
     }
 
 }

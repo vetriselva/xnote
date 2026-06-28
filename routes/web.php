@@ -48,6 +48,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/transactions', [TransactionController::class, 'index'])
         ->name('transactions.index');
 
+    Route::get('/transactions/export', [TransactionController::class, 'export'])
+        ->name('transactions.export');
+        
     Route::get('/transactions/recent-items', [TransactionController::class,'recentTransactions'])
     ->name('transactions.recentTransactions');
 });

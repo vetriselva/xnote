@@ -50,7 +50,13 @@
                     v-if="!enableFilter"
                     @click="enableFilter = !enableFilter"
                 >
-                    Filter
+                    Filters
+                </button>
+                <button
+                    @click="exportTransactions"
+                    class="px-3 py-1 rounded bg-green-600 text-white hover:bg-green-700"
+                >
+                    Export
                 </button>
             </div>
 
@@ -297,6 +303,33 @@ const refreshData = () => {
     });
     fetchTransactions(1);
     selectedTransaction.value = null;
+};
+
+const exportTransactions = async () => {
+    try {
+        const response = await axios.get("/transactions/export", {
+            params: {
+                service_id: filters.value.service_id,
+                from_date: filters.value.from_date,
+                to_date: filters.value.to_date,
+            },
+            responseType: "blob",
+        });
+
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "transactions.xlsx");
+        document.body.appendChild(link);
+        link.click();
+
+        link.remove();
+        window.URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error(error);
+        toast.value.show("Export failed");
+    }
 };
 
 const filters = ref({
